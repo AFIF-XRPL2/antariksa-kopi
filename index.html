@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antariksa Kopi - Rooftop Coffee Shop Semarang</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.3/cdn.min.js" defer></script>
+    <style>
+        html{
+            scroll-behavior: smooth;
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-montserrat {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .bg-deep-violet {
+            background-color: #3E1E68;
+        }
+        .bg-deep-dark{
+            background-color: #181C14;
+        }
+        .bg-golden-yellow {
+            background-color: #FFD700;
+        }
+        .text-golden-yellow {
+            color: #FFD700;
+        }
+        .text-soft-coral {
+            color: #FF6F61;
+        }
+        .text-cloud-white {
+            color: #F2F2F2;
+        }
+        .text-city-gray {
+            color: #7D7D7D;
+        }
+        .border-golden-yellow {
+            border-color: #FFD700;
+        }
+        .hover-bg-soft-coral:hover {
+            background-color: #FF6F61;
+        }
+        .slide-in {
+            animation: slideIn 1s ease forwards;
+        }
+        .fade-in {
+            animation: fadeIn 1.5s ease forwards;
+        }
+        .scale-in {
+            animation: scaleIn 0.5s ease forwards;
+        }
+        .rotate-in {
+            animation: rotateIn 0.8s ease forwards;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes rotateIn {
+            from {
+                transform: rotateY(25deg);
+                opacity: 0;
+            }
+            to {
+                transform: rotateY(0);
+                opacity: 1;
+            }
+        }
+        .bg-latte-white {
+            background-color: #FAF3E0;
+        }
+        .text-deep-violet {
+            color: #3E1E68;
+        }
+        /* Gradient background dari deep violet ke soft coral */
+        .gradient-senja {
+            background: linear-gradient(to bottom, #181C14, #3C3D37);
+        }
+        .color-satu{
+            color : #3C3D37;
+        }
+        .menu-card {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(62, 30, 104, 0.2), 0 10px 10px -5px rgba(62, 30, 104, 0.1);
+        }
+        
+        .menu-image {
+            transition: all 0.5s ease;
+        }
+        
+        .menu-card:hover .menu-image {
+            transform: scale(1.05);
+        }
+        
+        .menu-price {
+            transition: all 0.3s ease;
+        }
+        
+        .menu-card:hover .menu-price {
+            background-color: #FFD700;
+            color: #3E1E68;
+            transform: scale(1.1);
+        }
+        
+        .category-filter {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-filter::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.15), rgba(255, 111, 97, 0.15));
+            top: 0;
+            left: -100%;
+            transition: all 0.5s ease;
+            z-index: -1;
+            border-radius: inherit;
+        }
+        
+        .category-filter:hover::before,
+        .category-filter.active::before {
+            left: 0;
+        }
+        
+        .category-filter.active {
+            color: #3E1E68;
+            font-weight: 600;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(62, 30, 104, 0.1), 0 2px 4px -1px rgba(62, 30, 104, 0.06);
+        }
+        
+        .category-filter:not(.active):hover {
+            transform: translateY(-2px);
+        }
+        
+        .category-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter:hover .category-icon,
+        .category-filter.active .category-icon {
+            transform: scale(1.2);
+        }
+        
+        .tab-content {
+            min-height: 500px;
+        }
+
+        .gradient-mirror {
+            background: linear-gradient(to bottom,  #3C3D37, #181C14);
+        }
+        .carousel-item {
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .carousel-item.active {
+            opacity: 1;
+            position: relative;
+        }
+        
+        .carousel-thumbnail {
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+        
+        .carousel-thumbnail.active {
+            opacity: 1;
+            transform: scale(1.05);
+            border: 2px solid #FFD700;
+        }
+        
+        .carousel-control {
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-control:hover {
+            transform: scale(1.1);
+            background-color: rgba(255, 215, 0, 0.3);
+        }
+        
+        
+        
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-in;
+        }
+        
+         /* Custom Animations */
+         .nav-slide-in {
+            animation: navSlideIn 0.4s ease forwards;
+        }
+        .nav-fade-in {
+            animation: navFadeIn 0.5s ease forwards;
+        }
+        .nav-scale-in {
+            animation: navScaleIn 0.3s ease forwards;
+        }
+        
+        @keyframes navSlideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes navFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes navScaleIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Sidebar overlay */
+        .sidebar-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Nav item hover effect */
+        .nav-item {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #FFD700;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        
+        /* Custom transition for mobile sidebar */
+        .mobile-sidebar {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateX(-100%);
+        }
+        
+        .mobile-sidebar.open {
+            transform: translateX(0);
+        }
+        
+        /* Search bar animation */
+        .search-container {
+            transition: width 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .search-container.expanded {
+            width: 200px;
+        }
+        
+        .search-container.collapsed {
+            width: 40px;
+            overflow: hidden;
+        }
+        
+        /* Logo hover effect */
+        .logo-container {
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+        .backdrop-blur-fix {
+        background-color: rgba(0, 0, 0, 0.326);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); /* Safari support */
+        }
+        .footer-bg {
+            background-color: #181C14;
+        }
+        
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        .responsive-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .footer-logo {
+            filter: brightness(0) invert(1);
+            max-width: 180px;
+        }
+        
+        .social-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="bg-deep-dark font-poppins">
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex fixed top-0 left-0 right-0 z-50 items-center justify-between px-6 py-4 shadow-md backdrop-blur-fix">
+    <!-- Logo -->
+    <div class="flex items-center space-x-2 logo-container">
+        <img src="/images/antariksa.jpeg" alt="Café Senja Logo" class="w-30 h-12 rounded-md object-cover ">
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="flex items-center space-x-8">
+        <a href="#home" class="nav-item text-cloud-white hover:text-golden-yellow font-medium">Home</a>
+        <a href="#menu" class="nav-item text-cloud-white hover:text-golden-yellow font-medium">Menu</a>
+        <a href="#galery" class="nav-item text-cloud-white hover:text-golden-yellow font-medium">Galeri</a>
+        <a href="#contact" class="nav-item text-cloud-white hover:text-golden-yellow font-medium">Contact</a>
+    </div>
+
+    <!-- Search -->
+    <div class="search-container collapsed bg-gray-800 bg-opacity-50 rounded-full flex items-center px-3 py-1 border border-gray-700">
+        <input type="text" placeholder="Cari..." id="search-input" class="bg-transparent text-cloud-white placeholder-gray-500 focus:outline-none w-full">
+        <button id="search-toggle" class="text-golden-yellow focus:outline-none" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Navigation -->
+<nav class="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 shadow-md backdrop-blur-fix">
+    <div class="flex items-center space-x-2 logo-container">
+        <img src="/images/antariksa.jpeg" alt="Café Senja Logo" class="w-25 h-10 rounded-md   object-cover">
+    </div>
+    
+    <button id="mobile-menu-button" class="text-golden-yellow focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+</nav>
+
+
+
+<!-- Mobile Sidebar -->
+<div id="sidebar-overlay" class="sidebar-overlay fixed inset-0 z-40 hidden opacity-0"></div>
+
+<div id="mobile-sidebar" class="mobile-sidebar fixed top-0 left-0 z-50 h-full w-64 gradient-senja shadow-lg">
+    <div class="p-4 flex justify-between items-center border-b border-gray-700">
+        <div class="flex items-center space-x-2">
+            <img src="/images/antariksa.jpeg" alt="Café Senja Logo" class="w-25 h-10 rounded-md   object-cover">
+        </div>
+        <button id="close-sidebar" class="text-cloud-white hover:text-soft-coral focus:outline-none transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+    
+    <div class="py-4 px-2">
+        <div class="mb-4 px-3">
+            <div class="bg-gray-800 bg-opacity-50 rounded-lg flex items-center px-3 py-2">
+                <input type="text" placeholder="Cari..." id="search-input-mobile" class="bg-transparent text-cloud-white placeholder-gray-500 focus:outline-none w-full">
+                <button id="search-toggle-mobile" class="text-golden-yellow focus:outline-none" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <a href="#home" class="block py-3 px-4 text-cloud-white hover:bg-gray-800 hover:bg-opacity-40 rounded-lg mb-1 transition-colors duration-300 hover:text-golden-yellow">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                Home
+            </div>
+        </a>
+        
+        <a href="#menu" class="block py-3 px-4 text-cloud-white hover:bg-gray-800 hover:bg-opacity-40 rounded-lg mb-1 transition-colors duration-300 hover:text-golden-yellow">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                Menu
+            </div>
+        </a>
+        
+        <a href="#galery" class="block py-3 px-4 text-cloud-white hover:bg-gray-800 hover:bg-opacity-40 rounded-lg mb-1 transition-colors duration-300 hover:text-golden-yellow">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Galeri
+            </div>
+        </a>
+        
+        <a href="#contact" class="block py-3 px-4 text-cloud-white hover:bg-gray-800 hover:bg-opacity-40 rounded-lg transition-colors duration-300 hover:text-golden-yellow">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Contact
+            </div>
+        </a>
+    </div>
+</div>
+
+
+
+    <div x-data="{ 
+        activeSlide: 0,
+        slides: [
+            {
+                image: 'images/depan.png',
+                alt: 'Suasana rooftop malam dengan city light Semarang'
+            },
+            {
+                image: 'images/sunset.png',
+                alt: 'Sunset spektakuler dari atap café'
+            },
+            {
+                image: 'images/citylight.png',
+                alt: 'Minuman khas Antariksa Kopi'
+            }
+        ],
+        autoplay: null,
+        init() {
+            this.autoplay = setInterval(() => {
+                this.activeSlide = (this.activeSlide + 1) % this.slides.length
+            }, 5000)
+        }
+    }" x-init="init()" id="home" class="relative h-screen overflow-hidden">
+        <!-- Slider & Background Images -->
+        <template x-for="(slide, index) in slides" :key="index">
+            <div 
+                x-show="activeSlide === index"
+                x-transition:enter="transition duration-1000"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition duration-1000"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                class="absolute inset-0 w-full h-full bg-cover bg-center"
+                :style="`background-image: url(${slide.image})`"
+            >
+                <!-- Dark Overlay untuk meningkatkan kontras teks -->
+                <div class="absolute inset-0 bg-black opacity-60"></div>
+            </div>
+        </template>
+
+        <!-- Slider Controls -->
+        <div class="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+            <template x-for="(slide, index) in slides" :key="index">
+                <button 
+                    @click="activeSlide = index; clearInterval(autoplay); autoplay = setInterval(() => { activeSlide = (activeSlide + 1) % slides.length }, 5000)"
+                    :class="{'bg-golden-yellow': activeSlide === index, 'bg-white/30': activeSlide !== index}"
+                    class="w-3 h-3 rounded-full transition-all duration-300"
+                ></button>
+            </template>
+        </div>
+
+        <!-- Content Container -->
+        <div class="absolute inset-0 flex items-center justify-center z-10">
+            <div class="container mx-auto px-6 lg:px-16">
+                <div class="max-w-3xl mx-auto text-center">
+                    <!-- Headline -->
+                    <h1 class="text-4xl md:text-6xl font-bold font-playfair text-cloud-white mb-4 slide-in">
+                        <span class="block searchable-text">Nikmati Kopi</span>
+                        <span class="block searchable-text text-golden-yellow">di Atas Langit Semarang</span>
+                    </h1>
+                    
+                    <!-- Tagline -->
+                    <div class="font-montserrat text-lg md:text-xl text-city-gray mt-2 mb-8 slide-in" style="animation-delay: 0.3s">
+                        <span class="searchable-text text-golden-yellow font-medium">Rooftop. Kopi. Sunset. City Light.</span>
+                    </div>
+                    
+                    <!-- Description -->
+                    <p class="searchable-text text-base md:text-lg text-cloud-white mb-8 fade-in" style="animation-delay: 0.6s">
+                        Antariksa Kopi menghadirkan pengalaman ngopi sambil menikmati matahari tenggelam & kerlap-kerlip kota Semarang dari ketinggian.
+                    </p>
+                    
+                    <!-- Decorative element to enhance the space theme -->
+                    <div class="flex justify-center mb-8 fade-in" style="animation-delay: 0.8s">
+                        <div class="flex items-center">
+                            <span class="text-golden-yellow text-sm">★</span>
+                            <span class="w-16 h-px bg-golden-yellow mx-2"></span>
+                            <span class="text-golden-yellow text-lg">✦</span>
+                            <span class="w-16 h-px bg-golden-yellow mx-2"></span>
+                            <span class="text-golden-yellow text-sm">★</span>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in" style="animation-delay: 1s">
+                        <a href="#contact" class="searchable-text w-full sm:w-auto px-8 py-3 bg-golden-yellow text-deep-violet font-bold rounded-md transition-all hover:bg-white focus:outline-none focus:ring-2 focus:ring-golden-yellow focus:ring-offset-2">
+                            Reservasi Sekarang
+                        </a>
+                        <a href="#menu" class="searchable-text w-full sm:w-auto px-8 py-3 border-2 border-golden-yellow text-golden-yellow font-semibold rounded-md transition-all hover:bg-golden-yellow hover:text-deep-violet focus:outline-none focus:ring-2 focus:ring-golden-yellow focus:ring-offset-2">
+                            Lihat Menu
+                        </a>
+                        <a href="#galery" class="searchable-text w-full sm:w-auto px-8 py-3 text-cloud-white hover:text-golden-yellow font-semibold transition-all focus:outline-none">
+                            Jelajahi Café
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wave Transition -->
+<div class="absolute bottom-0 w-full overflow-hidden leading-none z-10">
+    <svg class="relative block w-full h-24 md:h-40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path fill="#181C14" fill-opacity="1" 
+            d="M0,160L60,154.7C120,149,240,139,360,154.7C480,171,600,213,720,224C840,235,960,213,1080,186.7C1200,160,1320,128,1380,112L1440,96L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
+        </path>
+    </svg>
+</div>
+
+    </div>
+    
+    <section id="menu" class="gradient-senja py-16 md:py-24 " x-data="{ 
+        activeTab: 'kopi',
+        menuCategories: [
+            { id: 'kopi', name: 'Kopi', icon: '☕' },
+            { id: 'non-kopi', name: 'Non-Kopi', icon: '🧋' },
+            { id: 'camilan', name: 'Camilan', icon: '🍰' },
+            { id: 'makanan', name: 'Makanan Berat', icon: '🍝' }
+        ]
+    }">
+    
+        <div class="container mx-auto px-6 lg:px-16">
+            <!-- Judul Section -->
+            <div class="text-center mb-16">
+                <h2 class="searchable-text text-3xl md:text-5xl font-bold font-poppins text-cloud-white mb-4 slide-in">Menu Favorit Kami</h2>
+                <p class="searchable-text text-cloud-white font-poppins max-w-2xl mx-auto slide-in opacity-90" style="animation-delay: 0.3s">
+                    Temukan pilihan kopi, minuman segar, dan camilan terbaik khas Antariksa Kopi.
+                </p>
+                
+                <!-- Decorative element untuk konsistensi dengan hero section -->
+                <div class="flex justify-center mt-6 fade-in" style="animation-delay: 0.5s">
+                    <div class="flex items-center">
+                        <span class="text-golden-yellow text-sm">★</span>
+                        <span class="w-16 h-px bg-golden-yellow mx-2"></span>
+                        <span class="text-golden-yellow text-lg">✦</span>
+                        <span class="w-16 h-px bg-golden-yellow mx-2"></span>
+                        <span class="text-golden-yellow text-sm">★</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kategori Menu (Enhanced Filter Design) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12 px-4">
+            <template x-for="category in menuCategories" :key="category.id">
+                <button 
+                    @click="activeTab = category.id" 
+                    :class="{'active': activeTab === category.id}"
+                    class="category-filter w-full max-w-[160px] mx-auto bg-white bg-opacity-95 shadow-md rounded-lg py-3 px-6 text-deep-violet flex items-center justify-center space-x-3 fade-in"
+                    :style="`animation-delay: ${0.7 + menuCategories.indexOf(category) * 0.1}s`">
+                    <span class="category-icon text-xl" x-text="category.icon"></span>
+                    <span class="font-montserrat font-medium text-sm md:text-base" x-text="category.name"></span>
+                </button>
+            </template>
+        </div>
+            
+            <!-- Menu Cards Container -->
+            <div class="tab-content">
+                
+                <!-- Kopi Menu -->
+                <div x-show="activeTab === 'kopi'" x-transition:enter="transition duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        <!-- Menu Item 1 -->
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md scale-in" style="animation-delay: 0.2s">
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="/images/kopi1.jpg" alt="Es Kopi Antariksa" class="w-full h-full object-cover menu-image">
+                                <div class="searchable-text absolute top-3 right-3 bg-deep-violet text-golden-yellow text-xs font-bold px-2 py-1 rounded-full">Favorit</div>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Es Kopi Antariksa</h3>
+                                <p class="searchable-text text-city-gray text-sm mb-4">Kopi susu dengan racikan khas & rasa manis seimbang yang dipadukan dengan es batu kristal.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp22.000</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Item 2 -->
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md scale-in" style="animation-delay: 0.4s">
+                            <div class="h-48 overflow-hidden">
+                                <img src="/images/espreso.jpg" alt="Kopi Skylight" class="w-full h-full object-cover menu-image">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Kopi Skylight</h3>
+                                <p class="searchable-text text-city-gray text-sm mb-4">Espresso dengan campuran karamel dan susu kental, disajikan dengan latte art bintang.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp28.000</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Non-Kopi Menu -->
+                <div x-show="activeTab === 'non-kopi'" x-transition:enter="transition duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        <!-- Menu Item 1 -->
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md rotate-in" style="animation-delay:.2s">
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="/images/matcha.jpg" alt="Sunset Strawberry" class="w-full h-full object-cover menu-image">
+                                <div class="searchable-text absolute top-3 right-3 bg-soft-coral text-white text-xs font-bold px-2 py-1 rounded-full">Terbaru</div>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Sunset Strawberry</h3>
+                                <p class="searchable-text text-city-gray text-sm mb-4">Minuman segar berbahan dasar strawberry dan jeruk dengan gradasi warna sunset yang memukau.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp25.000</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Item 2 -->
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md rotate-in" style="animation-delay: .4s">
+                            <div class="h-48 overflow-hidden">
+                                <img src="/images/stawberydrink.jpg" alt="Galaksi Matcha" class="w-full h-full object-cover menu-image">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Galaksi Matcha</h3>
+                                <p class="searchable-text text-city-gray text-sm mb-4">Matcha premium dengan susu almond dan topping bintang dari white chocolate yang meleleh.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp32.000</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Camilan Menu -->
+                <div x-show="activeTab === 'camilan'" x-transition:enter="transition duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        <!-- Menu Item 1 -->
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md scale-in" style="animation-delay: .2s">
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="/images/croissant.jpg" alt="Croissant Bintang" class="w-full h-full object-cover menu-image">
+                                <div class="searchable-text absolute top-3 right-3 bg-golden-yellow text-deep-violet text-xs font-bold px-2 py-1 rounded-full">Bestseller</div>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Croissant Bintang</h3>
+                                <p class="searchable-text text-city-gray text-sm mb-4">Croissant lembut berbentuk bintang dengan filling coklat leleh dan taburan gula halus.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp18.000</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Item 2 -->
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md scale-in" style="animation-delay: .4s">
+                            <div class="h-48 overflow-hidden">
+                                <img src="/images/klepon.jpg" alt="Klepon Galaxy" class="w-full h-full object-cover menu-image">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Klepon Galaxy</h3>
+                                <p class="searchable-text text-city-gray text-sm mb-4">Klepon modern dengan warna ungu-biru galaxy, isian gula merah dan taburan kelapa yang gurih.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp15.000</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Makanan Berat Menu -->
+                <div x-show="activeTab === 'makanan'" x-transition:enter="transition duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        <!-- Menu Item 1 -->
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md rotate-in" style="animation-delay: .2s">
+                            <div class="h-48 overflow-hidden">
+                                <img src="/images/pasta.jpg" alt="Pasta Nebula" class="w-full h-full object-cover menu-image">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Pasta Nebula</h3>
+                                <p class="searchable-text text-city-gray text-sm mb-4">Pasta creamy dengan saus keju spesial dan taburan parsley yang disajikan dalam mangkuk hitam elegan.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp42.000</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Item 2 -->
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md rotate-in" style="animation-delay: .4s">
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="/images/nasibowl.jpg" alt="Nasi Bowl Semarang" class="w-full h-full object-cover menu-image">
+                                <div class="searchable-text absolute top-3 right-3 bg-soft-coral text-white text-xs font-bold px-2 py-1 rounded-full">Spesial</div>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Nasi Bowl Semarang</h3>
+                                <p class="searchable-text text-city-gray text-sm mb-4">Nasi dengan ayam suwir bumbu rujak, telur, dan sayuran segar yang disajikan dalam mangkuk keramik.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp38.000</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View All Menu Button -->
+            <div class="text-center mt-16">
+                <a href="#" class="searchable-text inline-block px-8 py-3 bg-white bg-opacity-90 border-2 border-deep-violet text-deep-violet font-semibold rounded-md transition-all hover:bg-deep-violet hover:text-cloud-white transform hover:-translate-y-1 hover:shadow-lg">
+                    Lihat Menu Lengkap
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="galery" class="gradient-mirror py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header Section -->
+            <div class="text-center mb-10 animate-fadeIn">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-golden-yellow mb-4">Galeri Kegiatan Kami</h2>
+                <div class="w-24 h-1 bg-golden-yellow mx-auto"></div>
+            </div>
+            
+            <!-- Main Carousel -->
+            <div class="relative w-full h-64 sm:h-80 md:h-96 lg:h-[32rem] mb-6 rounded-lg overflow-hidden">
+                <!-- Carousel items -->
+                <div id="gallery-carousel" class="relative w-full h-full">
+                    <div class="carousel-item active rounded-lg overflow-hidden">
+                        <img src="/images/depan.png" alt="Suasana Antariksa Cafe" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                            <h3 class="text-xl text-cloud-white font-semibold">Suasana Antariksa Cafe</h3>
+                            <p class="text-city-gray">Kenyamanan dalam setiap sudut cafe</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item rounded-lg overflow-hidden">
+                        <img src="/images/livemusic.jpg" alt="Live Music" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                            <h3 class="text-xl text-cloud-white font-semibold">Live Music</h3>
+                            <p class="text-city-gray">Menikmati alunan musik setiap akhir pekan</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item rounded-lg overflow-hidden">
+                        <img src="/images/workshop.png" alt="Coffee Workshop" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                            <h3 class="text-xl text-cloud-white font-semibold">Coffee Workshop</h3>
+                            <p class="text-city-gray">Belajar rahasia seduhan kopi terbaik</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item rounded-lg overflow-hidden">
+                        <img src="/images/mabar.jpg" alt="Ruang Meeting" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                            <h3 class="text-xl text-cloud-white font-semibold">Tempat MABAR</h3>
+                            <p class="text-city-gray">Tempat diskusi bercanda nyaman untuk kebersamaan</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item rounded-lg overflow-hidden">
+                        <img src="/images/sunset.png" alt="Menu Special" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                            <h3 class="text-xl text-cloud-white font-semibold">Melihat Sunset</h3>
+                            <p class="text-city-gray">Melihat Keindahan Matahari Tenggelam </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button id="prev-button" class="carousel-control absolute top-1/2 left-4 -translate-y-1/2 z-10 bg-black/30 text-cloud-white hover:text-golden-yellow p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                </button>
+                <button id="next-button" class="carousel-control absolute top-1/2 right-4 -translate-y-1/2 z-10 bg-black/30 text-cloud-white hover:text-golden-yellow p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Thumbnails -->
+            <div class="flex overflow-x-auto space-x-2 pb-2 justify-center">
+                <div class="carousel-thumbnail active flex-shrink-0 w-20 h-16 sm:w-24 sm:h-20 rounded-md overflow-hidden cursor-pointer" data-index="0">
+                    <img src="/images/depan.png" alt="Thumbnail 1" class="w-full h-full object-cover">
+                </div>
+                <div class="carousel-thumbnail flex-shrink-0 w-20 h-16 sm:w-24 sm:h-20 rounded-md overflow-hidden cursor-pointer" data-index="1">
+                    <img src="/images/livemusic.jpg" alt="Thumbnail 2" class="w-full h-full object-cover">
+                </div>
+                <div class="carousel-thumbnail flex-shrink-0 w-20 h-16 sm:w-24 sm:h-20 rounded-md overflow-hidden cursor-pointer" data-index="2">
+                    <img src="/images/workshop.png" alt="Thumbnail 3" class="w-full h-full object-cover">
+                </div>
+                <div class="carousel-thumbnail flex-shrink-0 w-20 h-16 sm:w-24 sm:h-20 rounded-md overflow-hidden cursor-pointer" data-index="3">
+                    <img src="/images/mabar.jpg" alt="Thumbnail 4" class="w-full h-full object-cover">
+                </div>
+                <div class="carousel-thumbnail flex-shrink-0 w-20 h-16 sm:w-24 sm:h-20 rounded-md overflow-hidden cursor-pointer" data-index="4">
+                    <img src="/images/sunset.png" alt="Thumbnail 5" class="w-full h-full object-cover">
+                </div>
+            </div>
+            
+            <!-- Optional Description -->
+            <div class="text-center mt-8 max-w-2xl mx-auto">
+                <p class="text-cloud-white text-lg">Eksplorasi pengalaman yang kami tawarkan di Antariksa Cafe.</p>
+                <a href="#" class="mt-4 inline-block px-6 py-2 border-2 border-golden-yellow text-golden-yellow rounded-md hover-bg-soft-coral hover:border-transparent hover:text-white transition duration-300">Kunjungi Kami</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer-bg text-white">
+        <div class="container mx-auto px-4 py-12">
+            <!-- Logo and Social Media -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-2">ANTARIKSA<span class="text-yellow-400"></span></h2>
+                    <p class="text-gray-300">Tempat nongkrong dengan suasana langit malam semarang</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="social-icon text-2xl hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon text-2xl hover:text-yellow-400"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-icon text-2xl hover:text-yellow-400"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon text-2xl hover:text-yellow-400"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <!-- Map and Info -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Location Info -->
+                <div>
+                    <h3 class="text-xl font-semibold border-b-2 border-yellow-400 pb-2 mb-6">OUR LOCATION</h3>
+                    <p class="mb-6">Jalan Papandayan No 25AD, Bendan Ngisor, Kec. Gajahmungkur, Kota Semarang, Jawa Tengah 50232</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <h4 class="text-lg font-medium mb-3 flex items-center">
+                                <i class="fas fa-clock mr-2 text-yellow-400"></i> Jam Operasional
+                            </h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>Senin - Jumat: 08.00 - 22.00</li>
+                                <li>Sabtu - Minggu: 10.00 - 00.00</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium mb-3 flex items-center">
+                                <i class="fas fa-phone-alt mr-2 text-yellow-400"></i> Kontak Kami
+                            </h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>Phone: +62 812-3456-7890</li>
+                                <li>Email: info@antariksakopi.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="text-lg font-medium mb-3">Consumer Complaints Service</h4>
+                        <p class="text-sm text-gray-300">Contact Information Directorate General of Consumer Protection and Trade Compliance, Ministry of Trade of the Republic of Indonesia</p>
+                        <p class="text-sm text-gray-300 mt-2">Whatsapp Diktjen PKTN: 0853-1111-1010</p>
+                    </div>
+                </div>
+                
+                <!-- Google Maps -->
+                <div>
+                    <h3 class="text-xl font-semibold border-b-2 border-yellow-400 pb-2 mb-6">FIND US</h3>
+                    <div class="map-container rounded-lg overflow-hidden shadow-lg">
+                        <iframe class="responsive-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.993738528296!2d110.40004720407634!3d-7.01001841216472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b8e09b8d0fb%3A0x9bc3f744287f759!2sAntariksa%20Kopi!5e0!3m2!1sid!2sid!4v1744468577709!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="text-xs text-gray-400 mt-2">
+                        <span>Map data ©2025 Google | </span>
+                        <a href="#" class="footer-link text-gray-400">Terms</a> | 
+                        <a href="#" class="footer-link text-gray-400">Report a map error</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright Info -->
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0 text-center w-full">
+                    <p>Hak Cipta ©2025 Antariksa Kopi. All rights reserved.</p>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+       const searchInput = document.querySelector('input[placeholder="Cari..."]');
+const searchButton = document.querySelector('button'); // Atau kasih id supaya lebih spesifik
+
+searchButton.addEventListener('click', () => {
+    const keyword = searchInput.value.toLowerCase().trim();
+    if (!keyword) return;
+
+    const allTextElements = document.querySelectorAll('.searchable-text');
+    let foundElement = null;
+
+    allTextElements.forEach(el => {
+        if (!foundElement && el.textContent.toLowerCase().includes(keyword)) {
+            foundElement = el;
+        }
+    });
+
+    if (foundElement) {
+        foundElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        foundElement.style.backgroundColor = 'rgba(255, 255, 0, 0.3)';
+        setTimeout(() => {
+            foundElement.style.backgroundColor = '';
+        }, 2000);
+    } else {
+        alert('Teks tidak ditemukan.');
+    }
+});
+searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        searchButton.click();
+    }
+});
+const searchInputMobile = document.getElementById('search-input-mobile');
+const searchButtonMobile = document.getElementById('search-toggle-mobile');
+
+searchButtonMobile.addEventListener('click', () => {
+    const keyword = searchInputMobile.value.toLowerCase().trim();
+    if (!keyword) return;
+
+    const allTextElements = document.querySelectorAll('.searchable-text');
+    let foundElement = null;
+
+    allTextElements.forEach(el => {
+        if (!foundElement && el.textContent.toLowerCase().includes(keyword)) {
+            foundElement = el;
+        }
+    });
+
+    if (foundElement) {
+        foundElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        foundElement.style.backgroundColor = 'rgba(255, 255, 0, 0.3)';
+        setTimeout(() => {
+            foundElement.style.backgroundColor = '';
+        }, 2000);
+    } else {
+        alert('Teks tidak ditemukan.');
+    }
+});
+
+// Enter key support untuk mobile input
+searchInputMobile.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        searchButtonMobile.click();
+    }
+});
+
+
+
+
+       // Toggle mobile sidebar
+       const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeSidebarButton = document.getElementById('close-sidebar');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        function openSidebar() {
+            mobileSidebar.classList.add('open');
+            sidebarOverlay.classList.remove('hidden');
+            
+            // Delay opacity change for smooth animation
+            setTimeout(() => {
+                sidebarOverlay.classList.remove('opacity-0');
+                sidebarOverlay.classList.add('opacity-100');
+            }, 10);
+            
+            // Add animation classes
+            mobileSidebar.classList.add('nav-slide-in');
+        }
+
+        function closeSidebar() {
+            mobileSidebar.classList.remove('open');
+            sidebarOverlay.classList.add('opacity-0');
+            sidebarOverlay.classList.remove('opacity-100');
+            
+            // Delay hiding for smooth animation
+            setTimeout(() => {
+                sidebarOverlay.classList.add('hidden');
+            }, 300);
+            
+            // Remove animation classes
+            mobileSidebar.classList.remove('nav-slide-in');
+        }
+
+        mobileMenuButton.addEventListener('click', openSidebar);
+        closeSidebarButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Toggle search expand on desktop
+        const searchToggle = document.getElementById('search-toggle');
+        const searchContainer = document.querySelector('.search-container');
+
+        searchToggle.addEventListener('click', () => {
+            if (searchContainer.classList.contains('collapsed')) {
+                searchContainer.classList.remove('collapsed');
+                searchContainer.classList.add('expanded');
+            } else {
+                searchContainer.classList.add('collapsed');
+                searchContainer.classList.remove('expanded');
+            }
+        }); 
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.getElementById('gallery-carousel');
+            const items = carousel.querySelectorAll('.carousel-item');
+            const thumbnails = document.querySelectorAll('.carousel-thumbnail');
+            const prevButton = document.getElementById('prev-button');
+            const nextButton = document.getElementById('next-button');
+            let currentIndex = 0;
+            let intervalId;
+            
+            // Function to show current slide
+            const showSlide = (index) => {
+                // Remove active class from all items
+                items.forEach(item => {
+                    item.classList.remove('active');
+                });
+                thumbnails.forEach(thumb => {
+                    thumb.classList.remove('active');
+                });
+                
+                // Add active class to the current item
+                items[index].classList.add('active');
+                thumbnails[index].classList.add('active');
+                
+                // Update current index
+                currentIndex = index;
+            };
+            
+            // Previous slide
+            prevButton.addEventListener('click', () => {
+                resetAutoSlide();
+                let prevIndex = currentIndex - 1;
+                if (prevIndex < 0) prevIndex = items.length - 1;
+                showSlide(prevIndex);
+            });
+            
+            // Next slide
+            nextButton.addEventListener('click', () => {
+                resetAutoSlide();
+                let nextIndex = currentIndex + 1;
+                if (nextIndex >= items.length) nextIndex = 0;
+                showSlide(nextIndex);
+            });
+            
+            // Thumbnail click
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', () => {
+                    resetAutoSlide();
+                    const index = parseInt(thumbnail.getAttribute('data-index'));
+                    showSlide(index);
+                });
+            });
+            
+            // Auto slide
+            const startAutoSlide = () => {
+                intervalId = setInterval(() => {
+                    let nextIndex = currentIndex + 1;
+                    if (nextIndex >= items.length) nextIndex = 0;
+                    showSlide(nextIndex);
+                }, 5000); // Change slide every 5 seconds
+            };
+            
+            // Reset auto slide timer
+            const resetAutoSlide = () => {
+                clearInterval(intervalId);
+                startAutoSlide();
+            };
+            
+            // Initialize auto slide
+            startAutoSlide();
+            
+            // Stop auto slide on hover
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(intervalId);
+            });
+            
+            // Resume auto slide on mouse leave
+            carousel.addEventListener('mouseleave', () => {
+                startAutoSlide();
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevButton.click();
+                } else if (e.key === 'ArrowRight') {
+                    nextButton.click();
+                }
+            });
+            
+            // Touch events for swiping
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            carousel.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            const handleSwipe = () => {
+                if (touchEndX < touchStartX - 50) {
+                    // Swiped left
+                    nextButton.click();
+                } else if (touchEndX > touchStartX + 50) {
+                    // Swiped right
+                    prevButton.click();
+                }
+            };
+        });
+    </script>
+    </script>
+</body>
+</html>

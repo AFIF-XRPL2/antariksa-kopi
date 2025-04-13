@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.3/cdn.min.js" defer></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <style>
         html{
             scroll-behavior: smooth;
@@ -594,13 +596,174 @@
     
     <section id="menu" class="gradient-senja py-16 md:py-24 " x-data="{ 
         activeTab: 'kopi',
+        showAll: false,
         menuCategories: [
             { id: 'kopi', name: 'Kopi', icon: '☕' },
             { id: 'non-kopi', name: 'Non-Kopi', icon: '🧋' },
             { id: 'camilan', name: 'Camilan', icon: '🍰' },
             { id: 'makanan', name: 'Makanan Berat', icon: '🍝' }
-        ]
-    }">
+        ],
+        menuItems: {
+            'kopi': [
+              {
+                nama: 'Es Kopi Antariksa',
+                deskripsi: 'Kopi susu dengan racikan khas & rasa manis seimbang yang dipadukan dengan es batu kristal.',
+                harga: 'Rp22.000',
+                gambar: '/images/kopi/kopi1.jpg',
+                label: 'Favorit'
+              },
+              {
+                nama: 'Kopi Skylight',
+                deskripsi: 'Espresso dengan campuran karamel dan susu kental, disajikan dengan latte art bintang.',
+                harga: 'Rp28.000',
+                gambar: '/images/kopi/espreso.jpg',
+                label: ''
+              },
+              {
+                nama: 'Kopi Latte Boba',
+                deskripsi: 'Latte Lembut Ditambah Boba Kenyal',
+                harga: 'Rp26.000',
+                gambar: '/images/kopi/kopiboba.jpg',
+                label: 'Baru'
+              },
+              {
+                  nama: 'Es Kopi Gula Aren',
+                  deskripsi: 'Kopi susu creamy dengan gula aren khas',
+                  harga: 'Rp22.000',
+                  gambar: '/images/kopi/gulaaren.jpg',
+                  label: ''
+              },
+              {
+                  nama: 'Es Kopi Pandan',
+                  deskripsi: 'Kopi susu dengan aroma pandan segar',
+                  harga: 'Rp24.000',
+                  gambar: '/images/kopi/kopipandan.jpg',
+                  label: ''
+              },
+            ],
+          
+            'non-kopi': [
+              {
+                nama: 'Sunset Strawberry',
+                deskripsi: 'Minuman segar berbahan dasar strawberry dan jeruk dengan gradasi warna sunset.',
+                harga: 'Rp25.000',
+                gambar: '/images/non-kopi/stawberydrink.jpg',
+                label: 'Baru'
+              },
+              {
+                nama: 'Matcha Galaxy',
+                deskripsi: 'Teh hijau matcha creamy dengan taburan cokelat bintang.',
+                harga: 'Rp26.000',
+                gambar: '/images/non-kopi/matcha.jpg',
+                label: 'Favorit'
+              },
+              {
+                nama: 'Choco Hazelnut',
+                deskripsi: 'Cokelat blend dengan hazelnut dan whipped cream.',
+                harga: 'Rp27.000',
+                gambar: '/images/non-kopi/chocohazelnut.jpg',
+                label: 'Favorit'
+              },
+              {
+                nama: 'Es Regal Milo',
+                deskripsi: 'Milo dingin dengan regal & susu kental manis',
+                harga: 'Rp24.000',
+                gambar: '/images/non-kopi/milo.jpg',
+                label: ''
+              },
+              {
+                  nama: 'Lychee Yakult',
+                  deskripsi: 'Minuman soda lychee + yakult yang seger banget',
+                  harga: 'RP23.000',
+                  gambar: '/images/non-kopi/yakult.jpg',
+                  label: ''
+              },
+            ],
+          
+            'camilan' : [
+            {
+                nama: 'Roti Bakar',
+                deskripsi: 'Roti Bakar Dengan Topping Melimpah',
+                harga: 'Rp20.000',
+                gambar: '/images/camilan/rotibakar.jpg',
+                label: 'Favorit'
+            },
+            {
+                nama: 'Donat Mini',
+                deskripsi: 'Donat kecil dengan isian coklat lumer',
+                harga: 'Rp15.000',
+                gambar: '/images/camilan/donat.jpg',
+                label: 'Baru'
+            },
+            {
+                nama: 'Cireng',
+                deskripsi: 'Cireng renyah + sambal rujak pedas manis',
+                harga: 'Rp18.000',
+                gambar: '/images/camilan/cireng.jpg',
+                label: ''
+            },
+            {
+                nama: 'Kentang Keju',
+                deskripsi: 'Kentang goreng + keju leleh melimpah',
+                harga: 'Rp22.000',
+                gambar: '/images/camilan/kentang.jpg',
+                label: 'Favorit'
+            },
+            {
+                nama: 'Pisang Goreng Coklat Keju',
+                deskripsi: 'Pisang crispy dengan topping coklat dan keju',
+                harga: 'Rp19.000',
+                gambar: '/images/camilan/pisanggoreng.jpg',
+                label: ''
+            }
+            ],
+
+            'makanan' : [
+            {
+                nama: 'Mie Bangladesh',
+                deskripsi: 'Mie kuah pedas gurih khas bangladesh',
+                harga: 'Rp25.000',
+                gambar: '/images/makanan/mienyemek.jpg',
+                label: 'Favorit'
+            },
+            {
+                nama: 'Nasi Goreng',
+                deskripsi: 'Nasi Goreng Khas masakan Jawa',
+                harga: 'Rp28.000',
+                gambar: '/images/makanan/nasgor.jpg',
+                label: 'Favorit'
+            },
+            {
+                nama: 'Spaghetti Pedas Korea',
+                deskripsi: 'Spaghetti bumbu gochujang, pedas manis ala Korea',
+                harga: 'Rp30.0000',
+                gambar: '/images/makanan/pasta.jpg',
+                label: 'Baru'
+            },
+            {
+                nama: 'Rice Bowl Katsu',
+                deskripsi: 'Katsu ayam krispi + nasi & saus manis gurih',
+                harga: 'RP32.000',
+                gambar: '/images/makanan/nasibowl.jpg',
+                label: ''
+            },
+            {
+                nama: 'Nasi Ayam Lada Hitam',
+                deskripsi: 'Ayam goreng dengan saus lada hitam',
+                harga: 'Rp30.000',
+                gambar: '/images/makanan/nasiayam.jpg',
+                label: ''
+            }
+            ],
+          }
+          
+    }"
+    x-effect="
+    if (activeTab) {
+        setTimeout(() => AOS.refresh(), 50);
+    }
+"
+>
     
         <div class="container mx-auto px-6 lg:px-16">
             <!-- Judul Section -->
@@ -623,13 +786,14 @@
             </div>
             
             <!-- Kategori Menu (Enhanced Filter Design) -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12 px-4">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12 px-4" >
             <template x-for="category in menuCategories" :key="category.id">
                 <button 
                     @click="activeTab = category.id" 
                     :class="{'active': activeTab === category.id}"
-                    class="category-filter w-full max-w-[160px] mx-auto bg-white bg-opacity-95 shadow-md rounded-lg py-3 px-6 text-deep-violet flex items-center justify-center space-x-3 fade-in"
-                    :style="`animation-delay: ${0.7 + menuCategories.indexOf(category) * 0.1}s`">
+                    class="category-filter w-full max-w-[160px] mx-auto bg-white bg-opacity-95 shadow-md rounded-lg py-3 px-6 text-deep-violet flex items-center justify-center space-x-3"
+                    :style="`animation-delay: ${0.7 + menuCategories.indexOf(category) * 0.1}s`"
+                    >
                     <span class="category-icon text-xl" x-text="category.icon"></span>
                     <span class="font-montserrat font-medium text-sm md:text-base" x-text="category.name"></span>
                 </button>
@@ -640,156 +804,115 @@
             <div class="tab-content">
                 
                 <!-- Kopi Menu -->
-                <div x-show="activeTab === 'kopi'" x-transition:enter="transition duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <div x-show="activeTab === 'kopi'" x-transition>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <!-- Menu Item 1 -->
-                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md scale-in" style="animation-delay: 0.2s">
-                            <div class="h-48 overflow-hidden relative">
-                                <img src="/images/kopi1.jpg" alt="Es Kopi Antariksa" class="w-full h-full object-cover menu-image">
-                                <div class="searchable-text absolute top-3 right-3 bg-deep-violet text-golden-yellow text-xs font-bold px-2 py-1 rounded-full">Favorit</div>
+                      <template x-for="(item, index) in (showAll ? menuItems[activeTab] : menuItems[activeTab].slice(0, 2))" :key="index">
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md">
+                          <div class="h-48 overflow-hidden relative">
+                            <img :src="item.gambar" :alt="item.nama" class="w-full h-full object-cover menu-image">
+                            <template x-if="item.label">
+                              <div class="searchable-text absolute top-3 right-3 bg-deep-violet text-golden-yellow text-xs font-bold px-2 py-1 rounded-full" x-text="item.label"></div>
+                            </template>
+                          </div>
+                          <div class="p-5">
+                            <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2" x-text="item.nama"></h3>
+                            <p class="searchable-text text-city-gray text-sm mb-4" x-text="item.deskripsi"></p>
+                            <div class="flex items-center justify-between">
+                              <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm" x-text="item.harga"></span>
                             </div>
-                            <div class="p-5">
-                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Es Kopi Antariksa</h3>
-                                <p class="searchable-text text-city-gray text-sm mb-4">Kopi susu dengan racikan khas & rasa manis seimbang yang dipadukan dengan es batu kristal.</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp22.000</span>
-                                    
-                                </div>
-                            </div>
+                          </div>
                         </div>
-                        
-                        <!-- Menu Item 2 -->
-                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md scale-in" style="animation-delay: 0.4s">
-                            <div class="h-48 overflow-hidden">
-                                <img src="/images/espreso.jpg" alt="Kopi Skylight" class="w-full h-full object-cover menu-image">
-                            </div>
-                            <div class="p-5">
-                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Kopi Skylight</h3>
-                                <p class="searchable-text text-city-gray text-sm mb-4">Espresso dengan campuran karamel dan susu kental, disajikan dengan latte art bintang.</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp28.000</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                      </template>
                     </div>
-                </div>
+                  </div>
+                  
                 
                 <!-- Non-Kopi Menu -->
-                <div x-show="activeTab === 'non-kopi'" x-transition:enter="transition duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <div x-show="activeTab === 'non-kopi'" x-transition>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <!-- Menu Item 1 -->
-                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md rotate-in" style="animation-delay:.2s">
-                            <div class="h-48 overflow-hidden relative">
-                                <img src="/images/matcha.jpg" alt="Sunset Strawberry" class="w-full h-full object-cover menu-image">
-                                <div class="searchable-text absolute top-3 right-3 bg-soft-coral text-white text-xs font-bold px-2 py-1 rounded-full">Terbaru</div>
+                      <template x-for="(item, index) in (showAll ? menuItems[activeTab] : menuItems[activeTab].slice(0, 2))" :key="index">
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md">
+
+                          <div class="h-48 overflow-hidden relative">
+                            <img :src="item.gambar" :alt="item.nama" class="w-full h-full object-cover menu-image">
+                            <template x-if="item.label">
+                              <div class="searchable-text absolute top-3 right-3 bg-deep-violet text-golden-yellow text-xs font-bold px-2 py-1 rounded-full" x-text="item.label"></div>
+                            </template>
+                          </div>
+                          <div class="p-5">
+                            <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2" x-text="item.nama"></h3>
+                            <p class="searchable-text text-city-gray text-sm mb-4" x-text="item.deskripsi"></p>
+                            <div class="flex items-center justify-between">
+                              <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm" x-text="item.harga"></span>
                             </div>
-                            <div class="p-5">
-                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Sunset Strawberry</h3>
-                                <p class="searchable-text text-city-gray text-sm mb-4">Minuman segar berbahan dasar strawberry dan jeruk dengan gradasi warna sunset yang memukau.</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp25.000</span>
-                                    
-                                </div>
-                            </div>
+                          </div>
                         </div>
-                        
-                        <!-- Menu Item 2 -->
-                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md rotate-in" style="animation-delay: .4s">
-                            <div class="h-48 overflow-hidden">
-                                <img src="/images/stawberydrink.jpg" alt="Galaksi Matcha" class="w-full h-full object-cover menu-image">
-                            </div>
-                            <div class="p-5">
-                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Galaksi Matcha</h3>
-                                <p class="searchable-text text-city-gray text-sm mb-4">Matcha premium dengan susu almond dan topping bintang dari white chocolate yang meleleh.</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp32.000</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                      </template>
                     </div>
-                </div>
+                  </div>
+                  
                 
                 <!-- Camilan Menu -->
-                <div x-show="activeTab === 'camilan'" x-transition:enter="transition duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <div x-show="activeTab === 'camilan'" x-transition>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <!-- Menu Item 1 -->
-                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md scale-in" style="animation-delay: .2s">
-                            <div class="h-48 overflow-hidden relative">
-                                <img src="/images/croissant.jpg" alt="Croissant Bintang" class="w-full h-full object-cover menu-image">
-                                <div class="searchable-text absolute top-3 right-3 bg-golden-yellow text-deep-violet text-xs font-bold px-2 py-1 rounded-full">Bestseller</div>
+                      <template x-for="(item, index) in (showAll ? menuItems[activeTab] : menuItems[activeTab].slice(0, 2))" :key="index">
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md">
+
+                          <div class="h-48 overflow-hidden relative">
+                            <img :src="item.gambar" :alt="item.nama" class="w-full h-full object-cover menu-image">
+                            <template x-if="item.label">
+                              <div class="searchable-text absolute top-3 right-3 bg-deep-violet text-golden-yellow text-xs font-bold px-2 py-1 rounded-full" x-text="item.label"></div>
+                            </template>
+                          </div>
+                          <div class="p-5">
+                            <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2" x-text="item.nama"></h3>
+                            <p class="searchable-text text-city-gray text-sm mb-4" x-text="item.deskripsi"></p>
+                            <div class="flex items-center justify-between">
+                              <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm" x-text="item.harga"></span>
                             </div>
-                            <div class="p-5">
-                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Croissant Bintang</h3>
-                                <p class="searchable-text text-city-gray text-sm mb-4">Croissant lembut berbentuk bintang dengan filling coklat leleh dan taburan gula halus.</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp18.000</span>
-                                    
-                                </div>
-                            </div>
+                          </div>
                         </div>
-                        
-                        <!-- Menu Item 2 -->
-                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md scale-in" style="animation-delay: .4s">
-                            <div class="h-48 overflow-hidden">
-                                <img src="/images/klepon.jpg" alt="Klepon Galaxy" class="w-full h-full object-cover menu-image">
-                            </div>
-                            <div class="p-5">
-                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Klepon Galaxy</h3>
-                                <p class="searchable-text text-city-gray text-sm mb-4">Klepon modern dengan warna ungu-biru galaxy, isian gula merah dan taburan kelapa yang gurih.</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp15.000</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                      </template>
                     </div>
-                </div>
+                  </div>
+                  
                 
                 <!-- Makanan Berat Menu -->
-                <div x-show="activeTab === 'makanan'" x-transition:enter="transition duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <div x-show="activeTab === 'makanan'" x-transition>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                        <!-- Menu Item 1 -->
-                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md rotate-in" style="animation-delay: .2s">
-                            <div class="h-48 overflow-hidden">
-                                <img src="/images/pasta.jpg" alt="Pasta Nebula" class="w-full h-full object-cover menu-image">
+                      <template x-for="(item, index) in (showAll ? menuItems[activeTab] : menuItems[activeTab].slice(0, 2))" :key="index">
+                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md">
+
+                          <div class="h-48 overflow-hidden relative">
+                            <img :src="item.gambar" :alt="item.nama" class="w-full h-full object-cover menu-image">
+                            <template x-if="item.label">
+                              <div class="searchable-text absolute top-3 right-3 bg-deep-violet text-golden-yellow text-xs font-bold px-2 py-1 rounded-full" x-text="item.label"></div>
+                            </template>
+                          </div>
+                          <div class="p-5">
+                            <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2" x-text="item.nama"></h3>
+                            <p class="searchable-text text-city-gray text-sm mb-4" x-text="item.deskripsi"></p>
+                            <div class="flex items-center justify-between">
+                              <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm" x-text="item.harga"></span>
                             </div>
-                            <div class="p-5">
-                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Pasta Nebula</h3>
-                                <p class="searchable-text text-city-gray text-sm mb-4">Pasta creamy dengan saus keju spesial dan taburan parsley yang disajikan dalam mangkuk hitam elegan.</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp42.000</span>
-                                    
-                                </div>
-                            </div>
+                          </div>
                         </div>
-                        
-                        <!-- Menu Item 2 -->
-                        <div class="menu-card bg-white bg-opacity-95 rounded-lg overflow-hidden shadow-md rotate-in" style="animation-delay: .4s">
-                            <div class="h-48 overflow-hidden relative">
-                                <img src="/images/nasibowl.jpg" alt="Nasi Bowl Semarang" class="w-full h-full object-cover menu-image">
-                                <div class="searchable-text absolute top-3 right-3 bg-soft-coral text-white text-xs font-bold px-2 py-1 rounded-full">Spesial</div>
-                            </div>
-                            <div class="p-5">
-                                <h3 class="searchable-text text-lg font-bold font-montserrat text-deep-violet mb-2">Nasi Bowl Semarang</h3>
-                                <p class="searchable-text text-city-gray text-sm mb-4">Nasi dengan ayam suwir bumbu rujak, telur, dan sayuran segar yang disajikan dalam mangkuk keramik.</p>
-                                <div class="flex items-center justify-between">
-                                    <span class="searchable-text menu-price px-4 py-1 rounded-full bg-deep-violet text-cloud-white font-medium text-sm">Rp38.000</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                      </template>
                     </div>
-                </div>
+                  </div>
+                  
             </div>
             
             <!-- View All Menu Button -->
-            <div class="text-center mt-16">
-                <a href="#" class="searchable-text inline-block px-8 py-3 bg-white bg-opacity-90 border-2 border-deep-violet text-deep-violet font-semibold rounded-md transition-all hover:bg-deep-violet hover:text-cloud-white transform hover:-translate-y-1 hover:shadow-lg">
+            <div class="text-center mt-8">
+                <button 
+                    x-show="!showAll"
+                    @click="showAll = true"
+                    class="inline-block px-8 py-3 bg-white bg-opacity-90 border-2 border-deep-violet text-deep-violet font-semibold rounded-md transition-all hover:bg-deep-violet hover:text-cloud-white transform hover:-translate-y-1 hover:shadow-lg"
+                >
                     Lihat Menu Lengkap
-                </a>
-            </div>
+                </button>
+            </div>            
         </div>
     </section>
 
@@ -957,7 +1080,10 @@
         </div>
     </footer>
     
+
     <script>
+        AOS.init();
+        
        const searchInput = document.querySelector('input[placeholder="Cari..."]');
 const searchButton = document.querySelector('button'); // Atau kasih id supaya lebih spesifik
 
